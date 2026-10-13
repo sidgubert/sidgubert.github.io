@@ -81,4 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     form.reset();
     setTimeout(() => (aviso.hidden = true), 6000);
   });
+
+  /* ---------- Compatibilidade de download local (file://) ---------- */
+  if (window.location.protocol === 'file:') {
+    document.querySelectorAll('a[download]').forEach((a) => a.removeAttribute('download'));
+  }
 });
