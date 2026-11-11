@@ -122,6 +122,8 @@ export const deployments = [
     icon: Thermometer,
     status: 'active (monitoring)',
     pid: 4096,
+    repo: 'https://github.com/sidgubert/TCC_Da-Opera-o-Anal-gica-ao-Controle-Computacional-Estudo-de-Caso-da-Transforma-o-Digital-da-Cadeia',
+    repoLabel: 'sidgubert/tcc-cadeia-de-frio',
     summary: 'Monitoramento térmico industrial em campo, do sensor ao dado.',
     features: [
       'Implantação de controladores',

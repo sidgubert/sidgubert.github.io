@@ -13,16 +13,25 @@ const navLinks = [
 function useClock() {
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 30_000)
+    const id = setInterval(() => setNow(new Date()), 10_000)
     return () => clearInterval(id)
   }, [])
-  return now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+  const date = now.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
+  const time = now.toLocaleTimeString('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+  return { date, time }
 }
 
 /** Barra superior no estilo status-bar do tmux. */
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const time = useClock()
+  const { date, time } = useClock()
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-void/80 backdrop-blur-md">
@@ -51,9 +60,9 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <span className="hidden items-center gap-2 text-muted lg:flex">
+          <span className="hidden items-center gap-2 text-muted md:flex">
             <span className="size-1.5 animate-pulse rounded-full bg-phosphor" />
-            online · {time}
+            online · {date} · {time}
           </span>
           <button
             type="button"
@@ -87,6 +96,10 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+            <li className="flex items-center gap-2 border-t border-line/60 px-5 py-3 text-xs text-muted">
+              <span className="size-1.5 animate-pulse rounded-full bg-phosphor" />
+              online · {date} · {time}
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>

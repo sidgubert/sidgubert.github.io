@@ -84,7 +84,7 @@ function DeploymentCard({ d, className = '' }) {
             className="mt-6 inline-flex w-fit max-w-full items-center gap-2 rounded-sm border border-line-bright px-3 py-1.5 font-mono text-xs text-ink transition-colors hover:border-phosphor hover:text-phosphor"
           >
             <Github size={14} className="shrink-0" />
-            <span className="truncate">{d.repo.replace('https://github.com/', '')}</span>
+            <span className="truncate">{d.repoLabel ?? d.repo.replace('https://github.com/', '')}</span>
             <ExternalLink size={12} className="shrink-0 text-muted" />
           </a>
         )}
