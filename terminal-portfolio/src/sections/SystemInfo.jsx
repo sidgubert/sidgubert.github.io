@@ -55,7 +55,7 @@ export default function SystemInfo() {
                 </motion.div>
               ))}
 
-              <motion.div variants={item} className="mt-4 flex gap-0" aria-hidden="true">
+              <motion.div variants={item} className="mt-4 flex w-fit overflow-hidden rounded-[2px] border border-line" aria-hidden="true">
                 {palette.map((c) => (
                   <span key={c} className={`h-4 w-6 sm:w-8 ${c}`} />
                 ))}

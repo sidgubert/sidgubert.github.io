@@ -4,6 +4,7 @@ import { Maximize2, Minus } from 'lucide-react'
 import SectionHeader from '../components/SectionHeader'
 import Prompt from '../components/Prompt'
 import Typewriter from '../components/Typewriter'
+import { useTheme } from '../context/ThemeContext'
 import { links, personalInterests } from '../data/profile'
 
 /** Renderiza o JSON com syntax highlight. */
@@ -39,12 +40,13 @@ const HELP = [
   '  whoami                     quem é o dono deste servidor',
   '  ls                         lista arquivos',
   '  cat personal_interests.json',
+  '  theme [light|dark|toggle]  alterna entre CRT escuro e Paper claro',
   '  date                       data e hora atual',
   '  sudo hire-me               ;)',
   '  clear                      limpa o terminal',
 ]
 
-function runCommand(raw) {
+function runCommand(raw, { theme, setTheme, toggleTheme }) {
   const cmd = raw.trim()
   const [bin, ...args] = cmd.split(/\s+/)
   switch (bin) {
@@ -58,9 +60,33 @@ function runCommand(raw) {
       return [{ t: 'personal_interests.json   cv.pdf   .secrets', c: 'text-cyan' }]
     case 'cat':
       if (args[0] === 'personal_interests.json') return [{ json: true }]
-      if (args[0] === '.secrets') return [{ t: 'cat: .secrets: Permission denied. Nice try \\m/', c: 'text-[#ff5f57]' }]
+      if (args[0] === '.secrets') return [{ t: 'cat: .secrets: Permission denied. Nice try \\m/', c: 'text-danger' }]
       if (args[0] === 'cv.pdf') return [{ t: 'binary file — use o botão "download cv.pdf" no topo.', c: 'text-muted' }]
-      return [{ t: `cat: ${args[0] ?? ''}: No such file or directory`, c: 'text-[#ff5f57]' }]
+      return [{ t: `cat: ${args[0] ?? ''}: No such file or directory`, c: 'text-danger' }]
+    case 'theme': {
+      const sub = args[0]?.toLowerCase()
+      if (!sub) {
+        return [
+          {
+            t: `tema atual: ${theme === 'light' ? 'light (paper terminal)' : 'dark (crt phosphor)'} — use 'theme light', 'theme dark' ou 'theme toggle'`,
+            c: 'text-phosphor',
+          },
+        ]
+      }
+      if (sub === 'light' || sub === 'paper') {
+        setTheme('light')
+        return [{ t: '[OK] display_profile -> paper_terminal (light)', c: 'text-phosphor' }]
+      }
+      if (sub === 'dark' || sub === 'crt') {
+        setTheme('dark')
+        return [{ t: '[OK] display_profile -> crt_phosphor (dark)', c: 'text-phosphor' }]
+      }
+      if (sub === 'toggle') {
+        toggleTheme()
+        return [{ t: `[OK] display_profile -> ${theme === 'dark' ? 'paper_terminal (light)' : 'crt_phosphor (dark)'}`, c: 'text-phosphor' }]
+      }
+      return [{ t: `theme: opção inválida '${args[0]}' — use light, dark ou toggle`, c: 'text-danger' }]
+    }
     case 'date':
       return [{ t: new Date().toString() }]
     case 'echo':
@@ -69,19 +95,20 @@ function runCommand(raw) {
       if (args[0]?.startsWith('hire')) {
         return [
           { t: '[sudo] password for recruiter: ********', c: 'text-muted' },
-          { t: 'Access granted. Abrindo cliente de e-mail...', c: 'text-phosphor' },
-          { mailto: true },
+          { t: `Access granted. E-mail copiado: ${links.email}`, c: 'text-phosphor' },
+          { hireLinks: true },
         ]
       }
       return [{ t: 'recruiter is not in the sudoers file. This incident will be reported.', c: 'text-amber' }]
     case 'exit':
       return [{ t: 'logout? nunca. o servidor fica de pé 24/7.', c: 'text-amber' }]
     default:
-      return [{ t: `bash: ${bin}: command not found — digite 'help'`, c: 'text-[#ff5f57]' }]
+      return [{ t: `bash: ${bin}: command not found — digite 'help'`, c: 'text-danger' }]
   }
 }
 
 export default function UserConfig() {
+  const { theme, setTheme, toggleTheme } = useTheme()
   const [open, setOpen] = useState(false)
   const [booted, setBooted] = useState(false)
   const [history, setHistory] = useState([])
@@ -106,11 +133,11 @@ export default function UserConfig() {
       setHistory([])
       return
     }
-    const out = runCommand(value)
-    if (out.some((o) => o.mailto)) {
-      setTimeout(() => (window.location.href = `mailto:${links.email}?subject=Oportunidade`), 900)
+    const out = runCommand(value, { theme, setTheme, toggleTheme })
+    if (out.some((o) => o.hireLinks)) {
+      navigator.clipboard?.writeText(links.email).catch(() => {})
     }
-    setHistory((h) => [...h, { cmd: value, out: out.filter((o) => !o.mailto) }])
+    setHistory((h) => [...h, { cmd: value, out }])
   }
 
   return (
@@ -189,6 +216,28 @@ export default function UserConfig() {
                         o.json ? (
                           <div key={j} className="mt-1">
                             <JsonOutput data={personalInterests} />
+                          </div>
+                        ) : o.hireLinks ? (
+                          <div key={j} className="mt-1.5 flex flex-wrap gap-3 text-xs">
+                            <a
+                              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(links.email)}&su=Oportunidade`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline text-cyan hover:text-phosphor"
+                            >
+                              [Abrir Gmail Web]
+                            </a>
+                            <a
+                              href={links.whatsapp}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline text-cyan hover:text-phosphor"
+                            >
+                              [Chamar no WhatsApp]
+                            </a>
+                            <a href={`mailto:${links.email}?subject=Oportunidade`} className="underline text-muted hover:text-phosphor">
+                              [App de E-mail]
+                            </a>
                           </div>
                         ) : (
                           <p key={j} className={`whitespace-pre-wrap break-words ${o.c ?? 'text-ink/80'}`}>

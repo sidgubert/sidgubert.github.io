@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, Terminal, X } from 'lucide-react'
+import { Menu, Moon, Sun, Terminal, X } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
   { href: '#system', label: 'system_info' },
@@ -32,9 +33,11 @@ function useClock() {
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { date, time } = useClock()
+  const { theme, toggleTheme } = useTheme()
+  const isLight = theme === 'light'
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-void/80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-void/80 backdrop-blur-md transition-colors duration-250">
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 font-mono text-xs sm:px-6">
         <a href="#top" className="group flex items-center gap-2 text-ink" aria-label="Voltar ao início">
           <span className="grid size-7 place-items-center rounded-sm border border-line-bright bg-term text-phosphor transition-colors group-hover:border-phosphor">
@@ -59,15 +62,40 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
-          <span className="hidden items-center gap-2 text-muted md:flex">
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          <span className="hidden items-center gap-2 text-muted xl:flex">
             <span className="size-1.5 animate-pulse rounded-full bg-phosphor" />
             online · {date} · {time}
           </span>
+          <span className="hidden items-center gap-2 text-muted lg:flex xl:hidden">
+            <span className="size-1.5 animate-pulse rounded-full bg-phosphor" />
+            {date} · {time}
+          </span>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="inline-flex h-8 items-center gap-1.5 rounded-sm border border-line-bright bg-term px-2.5 text-[11px] text-ink transition-colors hover:border-phosphor hover:text-phosphor cursor-pointer"
+            aria-label={isLight ? 'Alternar para tema escuro (CRT)' : 'Alternar para tema claro (Paper Terminal)'}
+            title={isLight ? 'Modo CRT (escuro)' : 'Modo Paper Terminal (claro)'}
+          >
+            {isLight ? (
+              <>
+                <Moon size={13} className="text-phosphor" />
+                <span className="hidden sm:inline">--crt</span>
+              </>
+            ) : (
+              <>
+                <Sun size={13} className="text-amber" />
+                <span className="hidden sm:inline">--paper</span>
+              </>
+            )}
+          </button>
+
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="grid size-9 place-items-center rounded-sm border border-line text-ink md:hidden"
+            className="grid size-8 place-items-center rounded-sm border border-line text-ink md:hidden"
             aria-label={open ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={open}
           >

@@ -13,6 +13,8 @@ export const HOST = 'server'
 export const links = {
   github: 'https://github.com/sidgubert',
   linkedin: 'https://linkedin.com/in/sidnelson-gubert-1a7b261b1',
+  whatsapp: 'https://wa.me/5577988278689',
+  instagram: 'https://instagram.com/sidgubert',
   trailhead: 'https://www.salesforce.com/trailblazer/gubert',
   email: 'sidgubert@gmail.com',
   cv: './CV_Sidnelson_Gubert.pdf',

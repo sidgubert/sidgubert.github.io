@@ -98,7 +98,7 @@ export default function Hero() {
               <a
                 href="#deployments"
                 tabIndex={step >= 3 ? 0 : -1}
-                className="inline-flex items-center justify-center gap-2 rounded-sm bg-phosphor px-5 py-3 font-mono text-sm font-bold text-black shadow-[0_0_24px_-4px_rgba(57,255,136,0.6)] transition hover:bg-phosphor/90 hover:shadow-[0_0_32px_-2px_rgba(57,255,136,0.8)]"
+                className="inline-flex items-center justify-center gap-2 rounded-sm bg-phosphor px-5 py-3 font-mono text-sm font-bold text-on-phosphor shadow-[var(--shadow-cta)] transition hover:bg-phosphor/90 hover:shadow-[var(--shadow-cta-hover)]"
               >
                 <Rocket size={16} /> ./ver_deployments
               </a>

@@ -8,10 +8,12 @@
   --color-line-bright: #2a4334;
   --color-phosphor: #39ff88;
   --color-phosphor-dim: #22a85a;
+  --color-on-phosphor: #040806;
   --color-amber: #ffb547;
   --color-ink: #d5ddd7;
   --color-muted: #7f8c84;
   --color-cyan: #5ccfe6;
+  --color-danger: #ff5f57;
 
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -31,12 +33,43 @@
   }
 }
 
+:root {
+  --shadow-window: 0 24px 60px -24px rgb(0 0 0 / 0.9);
+  --shadow-cursor: 0 0 10px rgb(57 255 136 / 0.7);
+  --shadow-cta: 0 0 24px -4px rgb(57 255 136 / 0.6);
+  --shadow-cta-hover: 0 0 32px -2px rgb(57 255 136 / 0.8);
+}
+
+/* ---------- Tema Claro: Paper-White Terminal / Engineering Datasheet ---------- */
+html[data-theme="light"] {
+  color-scheme: light;
+  --color-void: #eef2ee;
+  --color-term: #f8faf7;
+  --color-term-2: #e5ece6;
+  --color-line: #c9d5cb;
+  --color-line-bright: #9bb0a0;
+  --color-phosphor: #087f43;
+  --color-phosphor-dim: #1b6e44;
+  --color-on-phosphor: #f8faf7;
+  --color-amber: #b45309;
+  --color-ink: #111a14;
+  --color-muted: #4d6054;
+  --color-cyan: #0369a1;
+  --color-danger: #c92a2a;
+
+  --shadow-window: 0 20px 44px -22px rgb(15 30 20 / 0.16), 0 2px 6px rgb(15 30 20 / 0.05);
+  --shadow-cursor: 0 0 8px rgb(8 127 67 / 0.35);
+  --shadow-cta: 0 8px 20px -6px rgb(8 127 67 / 0.4);
+  --shadow-cta-hover: 0 12px 26px -4px rgb(8 127 67 / 0.55);
+}
+
 /* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4.5rem;
   background: var(--color-void);
   color-scheme: dark;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
@@ -46,11 +79,12 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
   background: var(--color-phosphor);
-  color: #000;
+  color: var(--color-on-phosphor);
 }
 
 :focus-visible {
@@ -64,12 +98,24 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--color-line-bright); border: 2px solid var(--color-void); }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-phosphor-dim); }
 
-/* ---------- Efeitos CRT ---------- */
+/* ---------- Efeitos CRT / Fósforo ---------- */
 .text-glow {
   text-shadow: 0 0 6px rgb(57 255 136 / 0.55), 0 0 22px rgb(57 255 136 / 0.22);
 }
 .text-glow-amber {
   text-shadow: 0 0 6px rgb(255 181 71 / 0.5), 0 0 22px rgb(255 181 71 / 0.2);
+}
+
+html[data-theme="light"] .text-glow {
+  text-shadow: 0 0 1px rgb(8 127 67 / 0.24), 0 1px 10px rgb(8 127 67 / 0.12);
+}
+html[data-theme="light"] .text-glow-amber {
+  text-shadow: 0 0 1px rgb(180 83 9 / 0.22), 0 1px 10px rgb(180 83 9 / 0.12);
+}
+
+/* No modo paper-terminal, desativa o flicker de tubo catódico para leitura limpa */
+html[data-theme="light"] .animate-flicker {
+  animation: none;
 }
 
 /* Grade de fundo + vinheta */
@@ -78,6 +124,14 @@ body {
     radial-gradient(ellipse 80% 60% at 50% 0%, rgb(57 255 136 / 0.07), transparent 70%),
     linear-gradient(rgb(57 255 136 / 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgb(57 255 136 / 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+}
+
+html[data-theme="light"] .bg-grid {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgb(8 127 67 / 0.06), transparent 70%),
+    linear-gradient(rgb(17 40 25 / 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(17 40 25 / 0.055) 1px, transparent 1px);
   background-size: 100% 100%, 44px 44px, 44px 44px;
 }
 
@@ -93,9 +147,16 @@ body {
   mix-blend-mode: multiply;
 }
 
+html[data-theme="light"] .crt-overlay {
+  background:
+    repeating-linear-gradient(to bottom, rgb(0 0 0 / 0) 0, rgb(0 0 0 / 0) 2px, rgb(15 35 22 / 0.024) 3px, rgb(0 0 0 / 0) 4px),
+    radial-gradient(ellipse at center, transparent 62%, rgb(15 35 22 / 0.07) 100%);
+  mix-blend-mode: multiply;
+}
+
 /* Cards com brilho no hover */
 .glow-card {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background-color 0.25s ease;
 }
 .glow-card:hover,
 .glow-card:focus-within {
@@ -107,6 +168,15 @@ body {
   transform: translateY(-4px);
 }
 
+html[data-theme="light"] .glow-card:hover,
+html[data-theme="light"] .glow-card:focus-within {
+  border-color: rgb(8 127 67 / 0.55);
+  box-shadow:
+    0 0 0 1px rgb(8 127 67 / 0.16),
+    0 16px 32px -10px rgb(8 127 67 / 0.18),
+    inset 0 0 36px -22px rgb(8 127 67 / 0.12);
+}
+
 .glow-card-amber:hover,
 .glow-card-amber:focus-within {
   border-color: rgb(255 181 71 / 0.6);
@@ -116,9 +186,17 @@ body {
     inset 0 0 50px -24px rgb(255 181 71 / 0.25);
 }
 
+html[data-theme="light"] .glow-card-amber:hover,
+html[data-theme="light"] .glow-card-amber:focus-within {
+  border-color: rgb(180 83 9 / 0.55);
+  box-shadow:
+    0 0 0 1px rgb(180 83 9 / 0.16),
+    0 16px 32px -10px rgb(180 83 9 / 0.18),
+    inset 0 0 40px -24px rgb(180 83 9 / 0.12);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .animate-blink, .animate-flicker { animation: none !important; }
   .glow-card:hover, .glow-card:focus-within { transform: none; }
 }
-

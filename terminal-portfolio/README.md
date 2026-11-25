@@ -31,10 +31,11 @@ src/
     └── Footer.jsx           # links + prompt final com cursor piscando
 ```
 
-## Easter egg
+## Easter egg & Temas
 
-Expanda o bloco `User_Config` e digite `help`. Comandos: `whoami`, `ls`,
-`cat personal_interests.json`, `cat .secrets`, `date`, `echo`, `sudo hire-me`, `clear`.
+- Alternância de tema na status-bar superior (`--paper` / `--crt`) entre o **Modo Escuro (CRT Phosphor)** e o **Modo Claro (Paper Terminal / Engineering Datasheet)**, com persistência em `localStorage`.
+- Expanda o bloco `User_Config` e digite `help`. Comandos: `whoami`, `ls`,
+  `cat personal_interests.json`, `cat .secrets`, `theme [light|dark|toggle]`, `date`, `echo`, `sudo hire-me`, `clear`.
 
 ## Acessibilidade
 

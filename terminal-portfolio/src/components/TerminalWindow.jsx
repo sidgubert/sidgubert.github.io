@@ -11,7 +11,7 @@ export default function TerminalWindow({
 }) {
   return (
     <Tag
-      className={`relative overflow-hidden rounded-md border border-line bg-term/90 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.9)] backdrop-blur-sm ${className}`}
+      className={`relative overflow-hidden rounded-md border border-line bg-term/90 shadow-[var(--shadow-window)] backdrop-blur-sm transition-colors duration-250 ${className}`}
     >
       <div className="flex items-center gap-3 border-b border-line bg-term-2/80 px-3 py-2">
         <div className="flex shrink-0 gap-1.5" aria-hidden="true">
