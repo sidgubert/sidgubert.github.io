@@ -1,0 +1,35 @@
+# Sidnelson Gubert
+
+> Software Engineer & AI Systems Developer — construindo pontes entre sistemas legados de engenharia, automação industrial e agentes de IA.
+
+- Localização: Vitória da Conquista, BA — Brasil
+- Website: https://sidgubert.github.io/
+- Currículo (PDF): https://sidgubert.github.io/CV_Sidnelson_Gubert.pdf
+
+## Perfil & Formação
+
+- Mestrando em Engenharia de Sistemas e Produtos (PPGESP / IFBA), pesquisando supervisão de dados industriais multiprotocolo e detecção de anomalias com Machine Learning.
+- Pós-graduando em Desenvolvimento Web & Mobile (IFBA) e Bacharel em Sistemas de Informação (IFBA).
+- Mais de 10 anos de experiência conectando gestão de manutenção industrial de alto nível, sistemas corporativos (SAP, ERPs legados, Salesforce) e engenharia de software moderna.
+
+## Stack Técnico
+
+- **AI & Expert Systems:** Model Context Protocol (MCP), Semantic Caching (Qdrant / ChromaDB), AI Agents (Code Mode), Ollama / LLMs.
+- **Core:** Node.js, TypeScript, Python, React, Tailwind CSS.
+- **Infra & Dados:** Docker, PostgreSQL, Prisma ORM, Redis, BullMQ.
+- **Enterprise & Industrial:** Ecossistema Salesforce (Salesforce Admin, Trailhead Ranger, CDC, OAuth 2.0 JWT), SOAP/REST, Automação Industrial & IoT (TC900E Log, TCP 485, MQTT, Modbus TCP, OPC UA).
+
+## Projetos em Destaque
+
+- [PlantaBot · Supervisório Especialista](https://github.com/sidgubert/supervisorio-especialista): Sistema especialista conversacional para supervisão e manutenção de planta industrial com LLMs locais (Ollama), ferramentas MCP, cache semântico vetorial (ChromaDB) e avaliação com LLM-as-a-Judge.
+- [Salesforce Legacy Connector](https://github.com/sidgubert/salesforce-legacy-connector): Middleware bidirecional resiliente em Node.js/TypeScript (Fastify, BullMQ, Redis, Prisma) integrando Salesforce (Change Data Capture, JWT) a ERP legado via SOAP.
+- [Automação & IoT na Cadeia de Frio](https://github.com/sidgubert/TCC_Da-Opera-o-Anal-gica-ao-Controle-Computacional-Estudo-de-Caso-da-Transforma-o-Digital-da-Cadeia): Estudo de caso e implantação de malhas de monitoramento térmico industrial distribuído (TC900E Log, Sitrad Pro, TCP 485).
+
+## Contato
+
+- GitHub: https://github.com/sidgubert
+- LinkedIn: https://linkedin.com/in/sidnelson-gubert-1a7b261b1
+- Trailhead: https://www.salesforce.com/trailblazer/gubert
+- WhatsApp: https://wa.me/5577988278689
+- Instagram: https://instagram.com/sidgubert
+- E-mail: sidgubert@gmail.com

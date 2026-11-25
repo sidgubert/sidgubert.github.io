@@ -67,18 +67,17 @@ export default function Hero() {
             </motion.ul>
           )}
 
-          {/* Título digitado */}
+          {/* Título digitado (sempre presente no DOM para SEO imediato) */}
           <div className="mt-10 min-h-[7.5rem] sm:mt-12 sm:min-h-[9rem] lg:min-h-[10.5rem]">
-            {step >= 2 && (
-              <Typewriter
-                as="h1"
-                segments={titleSegments}
-                speed={0.04}
-                cursor={step >= 3 ? 'always' : 'active'}
-                onComplete={() => setStep(3)}
-                className="font-mono text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
-              />
-            )}
+            <Typewriter
+              as="h1"
+              segments={titleSegments}
+              speed={0.04}
+              start={step >= 2}
+              cursor={step >= 3 ? 'always' : step >= 2 ? 'active' : 'none'}
+              onComplete={() => setStep(3)}
+              className="font-mono text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
+            />
           </div>
 
           {/* Subtítulo + CTAs */}
@@ -87,7 +86,6 @@ export default function Hero() {
             animate={step >= 3 ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="mt-6"
-            aria-hidden={step < 3}
           >
             <p className="max-w-3xl font-sans text-base leading-relaxed text-ink/80 sm:text-lg">
               <span className="font-mono text-phosphor">&gt; </span>

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy:root": "vite build && powershell -NoProfile -Command \"Remove-Item ..\\assets\\index-*.js, ..\\assets\\index-*.css -ErrorAction SilentlyContinue; Copy-Item dist\\index.html ..\\index.html -Force; Copy-Item dist\\favicon.svg ..\\favicon.svg -Force; Copy-Item dist\\assets\\* ..\\assets\\ -Recurse -Force\"",
+    "deploy:root": "vite build && powershell -NoProfile -Command \"Remove-Item ..\\assets\\index-*.js, ..\\assets\\index-*.css -ErrorAction SilentlyContinue; Copy-Item dist\\index.html, dist\\favicon.svg, dist\\robots.txt, dist\\sitemap.xml, dist\\llms.txt, dist\\og-image.png ..\\ -Force; Copy-Item dist\\assets\\* ..\\assets\\ -Recurse -Force\"",
     "preview": "vite preview"
   },
   "dependencies": {

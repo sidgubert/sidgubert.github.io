@@ -4,15 +4,8 @@ import Cursor from './Cursor'
 
 /**
  * Efeito de digitação (typewriter) com Framer Motion.
- * Cada caractere é revelado em sequência via staggerChildren.
- *
- * Props:
- *  - text | segments: string simples ou [{ text, className }] para colorir partes
- *  - speed: segundos por caractere
- *  - delay: atraso inicial (s)
- *  - start: inicia a animação quando true (ex.: quando entra na viewport)
- *  - cursor: 'active' (só enquanto digita) | 'always' | 'none'
- *  - onComplete: callback ao terminar (útil para encadear sequências)
+ * Inclui texto completo real em .sr-only para indexação imediata (SEO) e leitores de tela,
+ * enquanto os caracteres visuais são revelados em sequência via staggerChildren.
  */
 export default function Typewriter({
   text = '',
@@ -53,7 +46,8 @@ export default function Typewriter({
   const showCursor = cursor === 'always' || (cursor === 'active' && start && !done)
 
   return (
-    <Tag className={className} aria-label={fullText}>
+    <Tag className={className}>
+      <span className="sr-only">{fullText}</span>
       {reduce ? (
         <span aria-hidden="true">
           {parts.map((p, i) => (
@@ -90,4 +84,3 @@ export default function Typewriter({
     </Tag>
   )
 }
-
