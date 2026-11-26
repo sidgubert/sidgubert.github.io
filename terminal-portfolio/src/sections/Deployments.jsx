@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Activity, ExternalLink, Github } from 'lucide-react'
+import { Activity, ExternalLink, Github, Linkedin } from 'lucide-react'
 import SectionHeader from '../components/SectionHeader'
 import { deployments } from '../data/profile'
 
@@ -57,6 +57,12 @@ function DeploymentCard({ d, className = '' }) {
           ))}
         </ul>
 
+        {d.roadmap && (
+          <p className="mt-4 rounded-sm border border-dashed border-amber/40 bg-amber/[0.06] px-3 py-2 font-mono text-[11px] text-amber">
+            <span className="font-bold">next →</span> {d.roadmap}
+          </p>
+        )}
+
         {/* Gráfico de atividade estilo painel de monitoramento */}
         <div className="mt-6" aria-hidden="true">
           <div className="mb-1.5 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted">
@@ -76,17 +82,33 @@ function DeploymentCard({ d, className = '' }) {
           </div>
         </div>
 
-        {d.repo && (
-          <a
-            href={d.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex w-fit max-w-full items-center gap-2 rounded-sm border border-line-bright px-3 py-1.5 font-mono text-xs text-ink transition-colors hover:border-phosphor hover:text-phosphor"
-          >
-            <Github size={14} className="shrink-0" />
-            <span className="truncate">{d.repoLabel ?? d.repo.replace('https://github.com/', '')}</span>
-            <ExternalLink size={12} className="shrink-0 text-muted" />
-          </a>
+        {(d.repo || d.post) && (
+          <div className="mt-6 flex flex-wrap gap-2">
+            {d.repo && (
+              <a
+                href={d.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit max-w-full items-center gap-2 rounded-sm border border-line-bright px-3 py-1.5 font-mono text-xs text-ink transition-colors hover:border-phosphor hover:text-phosphor"
+              >
+                <Github size={14} className="shrink-0" />
+                <span className="truncate">{d.repoLabel ?? d.repo.replace('https://github.com/', '')}</span>
+                <ExternalLink size={12} className="shrink-0 text-muted" />
+              </a>
+            )}
+            {d.post && (
+              <a
+                href={d.post}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 rounded-sm border border-line-bright px-3 py-1.5 font-mono text-xs text-ink transition-colors hover:border-cyan hover:text-cyan"
+              >
+                <Linkedin size={14} className="shrink-0" />
+                <span>ler artigo</span>
+                <ExternalLink size={12} className="shrink-0 text-muted" />
+              </a>
+            )}
+          </div>
         )}
 
         <ul className="mt-auto flex flex-wrap gap-2 pt-6" aria-label="Tecnologias">

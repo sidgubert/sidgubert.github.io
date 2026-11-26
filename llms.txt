@@ -21,9 +21,9 @@
 
 ## Projetos em Destaque
 
+- [Modbus Edge Copilot](https://github.com/sidgubert/modbus-edge-copilot): Gateway de diagnóstico industrial local-first em Python. Aquisição determinística via Modbus TCP com detecção de anomalias por regras físicas; cache de estado operacional em SQLite (respostas < 5 ms para falhas recorrentes); inferência local com modelo quantizado via Ollama, sem enviar telemetria para a nuvem; saída validada por JSON Schema/Pydantic (causa provável, ação imediata, criticidade, risco de parada). Próxima versão (v0.2): servidor MCP para histórico de ordens de serviço e especificações de ativos. Artigo: https://www.linkedin.com/posts/sidnelson-gubert-1a7b261b1_automacaoindustrial-edgeai-python-share-7531364912829313024-aif1/
 - [PlantaBot · Supervisório Especialista](https://github.com/sidgubert/supervisorio-especialista): Sistema especialista conversacional para supervisão e manutenção de planta industrial com LLMs locais (Ollama), ferramentas MCP, cache semântico vetorial (ChromaDB) e avaliação com LLM-as-a-Judge.
 - [Salesforce Legacy Connector](https://github.com/sidgubert/salesforce-legacy-connector): Middleware bidirecional resiliente em Node.js/TypeScript (Fastify, BullMQ, Redis, Prisma) integrando Salesforce (Change Data Capture, JWT) a ERP legado via SOAP.
-- [Automação & IoT na Cadeia de Frio](https://github.com/sidgubert/TCC_Da-Opera-o-Anal-gica-ao-Controle-Computacional-Estudo-de-Caso-da-Transforma-o-Digital-da-Cadeia): Estudo de caso e implantação de malhas de monitoramento térmico industrial distribuído (TC900E Log, Sitrad Pro, TCP 485).
 
 ## Contato
 

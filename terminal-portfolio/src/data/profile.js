@@ -1,10 +1,10 @@
 import {
   BrainCircuit,
   Building2,
+  Cpu,
   Database,
   Factory,
   Layers,
-  Thermometer,
 } from 'lucide-react'
 
 export const USER = 'sidnelson_gubert'
@@ -83,6 +83,26 @@ export const techStack = [
 
 export const deployments = [
   {
+    service: 'modbus-edge-copilot.service',
+    name: 'Modbus Edge Copilot',
+    icon: Cpu,
+    status: 'active (v0.1)',
+    pid: 502,
+    repo: 'https://github.com/sidgubert/modbus-edge-copilot',
+    post: 'https://www.linkedin.com/posts/sidnelson-gubert-1a7b261b1_automacaoindustrial-edgeai-python-share-7531364912829313024-aif1/',
+    summary:
+      'Gateway de diagnóstico industrial local-first em Python: lê o CLP via Modbus TCP e usa um LLM na borda apenas como apoio ao diagnóstico — a IA não substitui intertravamento.',
+    features: [
+      'Aquisição determinística via Modbus TCP; anomalias detectadas por regras físicas, inferência ociosa na operação nominal',
+      'Cache de estado operacional em SQLite: falhas recorrentes respondidas em < 5 ms, sem reprocessar tokens',
+      'Inferência local quantizada via Ollama: telemetria nunca sai da planta, sem custo por requisição',
+      'Contrato de saída estrito (Pydantic + JSON Schema): causa, ação imediata, criticidade e risco de parada',
+    ],
+    roadmap: 'v0.2: servidor MCP para consultar histórico de OS e especificações dos ativos',
+    tags: ['Python', 'Modbus TCP', 'Ollama', 'SQLite', 'Pydantic', 'Edge AI'],
+    activity: [2, 2, 3, 2, 2, 3, 2, 2, 9, 12, 4, 2, 2, 3, 2, 2, 2, 3, 2, 10, 3, 2, 2, 3],
+  },
+  {
     service: 'plantabot.service',
     name: 'PlantaBot · Supervisório Especialista',
     icon: Factory,
@@ -117,23 +137,6 @@ export const deployments = [
     ],
     tags: ['Node.js', 'TypeScript', 'Salesforce', 'Fastify', 'BullMQ', 'PostgreSQL', 'Docker'],
     activity: [4, 6, 5, 8, 7, 9, 6, 10, 8, 7, 9, 11, 8, 10, 9, 7, 10, 12, 9, 11, 10, 13, 11, 12],
-  },
-  {
-    service: 'thermal-iot.service',
-    name: 'Automação & IoT',
-    icon: Thermometer,
-    status: 'active (monitoring)',
-    pid: 4096,
-    repo: 'https://github.com/sidgubert/TCC_Da-Opera-o-Anal-gica-ao-Controle-Computacional-Estudo-de-Caso-da-Transforma-o-Digital-da-Cadeia',
-    repoLabel: 'sidgubert/tcc-cadeia-de-frio',
-    summary: 'Monitoramento térmico industrial em campo, do sensor ao dado.',
-    features: [
-      'Implantação de controladores',
-      'Malhas de monitoramento térmico industrial',
-      'Telemetria TC900E Log via TCP 485',
-    ],
-    tags: ['IoT', 'TC900E Log', 'TCP 485', 'Cadeia de frio'],
-    activity: [6, 6, 7, 6, 7, 7, 6, 8, 7, 7, 6, 7, 8, 7, 6, 7, 7, 8, 7, 6, 7, 7, 8, 7],
   },
 ]
 
